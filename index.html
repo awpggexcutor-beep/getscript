@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Executors | Performance Platform</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at 50% 50%, #0f0e17 0%, #06050a 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    #particles-js, #fog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    #fog {
+      background: radial-gradient(circle at 50% 70%, rgba(168,85,247,0.15) 0%, rgba(10,10,20,0.9) 80%);
+      animation: fogMove 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes fogMove {
+      0% { background-position: 50% 70%; }
+      100% { background-position: 55% 60%; }
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.55);
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 10%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .header-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #b388ff;
+      text-shadow: 0 0 12px rgba(179,136,255,0.8);
+      letter-spacing: 1px;
+    }
+
+    .download-btn {
+      background: linear-gradient(90deg, #7f5af0, #2cb67d);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 12px;
+      border: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(127, 90, 240, 0.6);
+    }
+
+    .download-btn.glow {
+      animation: glowWave 1.2s ease;
+    }
+
+    @keyframes glowWave {
+      0% { box-shadow: 0 0 0px #7f5af0; }
+      50% { box-shadow: 0 0 25px #7f5af0; }
+      100% { box-shadow: 0 0 0px #7f5af0; }
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 260px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      color: #d7b0ff;
+      text-shadow: 0 0 30px rgba(179,136,255,0.6);
+    }
+
+    .hero p {
+      color: #bfc4cc;
+      font-size: 1.2rem;
+      margin-bottom: 50px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 120px auto;
+      padding: 0 10%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature {
+      background: rgba(30, 32, 40, 0.95);
+      padding: 40px 20px;
+      border-radius: 20px;
+      border: 2px solid transparent;
+      transition: 0.25s ease;
+      cursor: pointer;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      text-align: center;
+    }
+
+    .feature:hover {
+      background-color: rgba(50, 52, 65, 0.95);
+    }
+
+    .feature.active {
+      transform: translateY(-10px);
+      border-color: #9d5cff;
+      box-shadow: 0 0 15px #9d5cff;
+    }
+
+    .feature h2 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: #9d5cff;
+    }
+
+    .feature p {
+      color: #bfc4cc;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature.active p {
+      opacity: 1;
+    }
+
+    .feature button {
+      background: linear-gradient(90deg, #7f5af0, #2cb67d);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: 'Orbitron', sans-serif;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .feature button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(127, 90, 240, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #777;
+      z-index: 2;
+    }
+
+    .show {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      transition: all 0.6s ease;
+    }
+
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0f0e17;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      color: #b388ff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+    }
+
+    #loader::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 4px solid #b388ff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      margin-top: 15px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #complete {
+      display: none;
+      text-align: center;
+      color: #9d5cff;
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 로딩 -->
+  <div id="loader">Loading executors...</div>
+
+  <!-- 배경 -->
+  <div id="particles-js"></div>
+  <div id="fog"></div>
+  <div id="overlay"></div>
+
+  <header>
+    <div class="header-title">Get Executors Today</div>
+    <button class="download-btn" id="downloadBtn">Download</button>
+  </header>
+
+  <section class="hero">
+    <h1>Lua Performance Platform</h1>
+    <p>Fast, Safe, and Powerful Execution — Redefining Performance.</p>
+    <div id="complete">✅ Download Complete!</div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h2>DotE</h2>
+      <p>Perfect Official UNC Score, Perfect Official sUNC Score, User friendly UI.</p>
+      <button class="get-script">Download DotE</button>
+    </div>
+    <div class="feature">
+      <h2>99% sUNC</h2>
+      <p>Perfect Official sUNC Score.</p>
+      <button class="get-script">Get Script</button>
+    </div>
+    <div class="feature">
+      <h2>Undetected</h2>
+      <p>Safe, Security Execution</p>
+      <button class="get-script">Get Script</button>
+    </div>
+    <div class="feature">
+      <h2>Fast Execution</h2>
+      <p>Take 2 Seconds to Attach</p>
+      <button class="get-script">Get Script</button>
+    </div>
+  </section>
+
+  <footer>© 2025 DotE. All rights reserved.</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    // 로딩
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 1000);
+    });
+
+    // 다운로드
+    const btn = document.getElementById("downloadBtn");
+    const completeMsg = document.getElementById("complete");
+    btn.addEventListener("click", () => {
+      btn.classList.add("glow");
+      setTimeout(() => btn.classList.remove("glow"), 1200);
+      completeMsg.style.display = "block";
+      window.open("https://lootdest.org/s?RPtIRF0k", "_blank");
+    });
+
+    // 카드 활성화
+    const features = document.querySelectorAll(".feature");
+    features.forEach(f => {
+      f.addEventListener("click", () => {
+        features.forEach(i => i.classList.remove("active"));
+        f.classList.add("active");
+      });
+    });
+
+    // Get Script 버튼
+    document.querySelectorAll(".get-script").forEach(b => {
+      b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.open("https://pastebin.com", "_blank");
+      });
+    });
+
+    // 스크롤 애니메이션
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("show");
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".feature").forEach(f => observer.observe(f));
+
+    // particles.js
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 85 },
+        "color": { "value": "#9d5cff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.4 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#2cb67d",
+          "opacity": 0.3,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 2 }
+      },
+      "interactivity": {
+        "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true },
+        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.6 } } }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>
