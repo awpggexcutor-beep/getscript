@@ -14,6 +14,7 @@
       background: radial-gradient(circle at top left, #0f1023, #050510 70%);
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
 
     /* ===== Fog Layer ===== */
@@ -29,6 +30,7 @@
       animation: fogMove 80s linear infinite;
       z-index: 0;
       filter: blur(20px);
+      pointer-events: none;
     }
 
     @keyframes fogMove {
@@ -75,13 +77,19 @@
       padding: 30px;
       width: 250px;
       text-align: center;
-      transition: 0.3s ease;
+      transition: 0.4s ease;
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      opacity: 0;
+      transform: translateY(40px);
     }
 
-    /* Corner Line Animation */
+    .feature.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .feature::before, .feature::after {
       content: '';
       position: absolute;
@@ -121,6 +129,8 @@
       font-weight: 600;
       transition: 0.25s;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
     .download-btn:hover {
@@ -129,14 +139,25 @@
       box-shadow: 0 0 15px #66c2ff;
     }
 
-    /* Glow Pulse for Active */
-    .feature.active {
-      border-color: #66c2ff;
-      box-shadow: 0 0 20px #66c2ff;
-      transform: translateY(-10px);
+    /* Loading Spinner */
+    .download-btn.loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      border: 2px solid transparent;
+      border-top-color: #66c2ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      transform: translate(-50%, -50%);
     }
 
-    /* Download Complete Notice */
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
     .download-complete {
       display: none;
       color: #7feeff;
@@ -149,6 +170,18 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2.2rem;
+        padding: 0 10px;
+      }
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 
@@ -160,43 +193,35 @@
   </section>
 
   <section class="features">
-    <!-- 99% UNC -->
     <div class="feature" id="unc-card">
       <h2>Dot E</h2>
       <p>Perfect Official UNC Score, sUNC Score. Fast and safe execution!</p>
       <button class="download-btn" id="download-unc">Download</button>
       <div class="download-complete" id="complete-unc">Download Complete!</div>
-      <!-- [UNC SCRIPT CODE PLACEHOLDER] -->
     </div>
 
-    <!-- 99% sUNC -->
     <div class="feature" id="sunc-card">
       <h2>Krnl Beta Remake</h2>
       <p>User friendly UI with Perfect UNC, sUNC with VelocityAPI!</p>
       <button class="download-btn" id="download-sunc">Download</button>
-      <!-- [SUNC SCRIPT CODE PLACEHOLDER] -->
     </div>
 
-    <!-- Undetected -->
     <div class="feature" id="undetected-card">
       <h2>Synapse Remake</h2>
       <p>Safe execution with friendly UI!</p>
       <button class="download-btn" id="download-undetected">Download</button>
-      <!-- [UNDETECTED SCRIPT CODE PLACEHOLDER] -->
     </div>
 
-    <!-- Fast Execution -->
     <div class="feature" id="fast-card">
       <h2>Dot E HomePage</h2>
       <p>Dot E Official website</p>
       <button class="download-btn" id="download-fast">Download</button>
-      <!-- [FAST SCRIPT CODE PLACEHOLDER] -->
     </div>
   </section>
 
   <script>
+    /* ===== Active Card ===== */
     const featureCards = document.querySelectorAll('.feature');
-
     featureCards.forEach(card => {
       card.addEventListener('click', () => {
         featureCards.forEach(c => c.classList.remove('active'));
@@ -204,36 +229,46 @@
       });
     });
 
-    // ✅ 99% UNC Download 버튼
-    const uncDownload = document.getElementById('download-unc');
-    const uncComplete = document.getElementById('complete-unc');
-    uncDownload.addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.open('https://lootdest.org/s?RPtIRF0k', '_blank');
-      uncComplete.style.display = 'block';
-      setTimeout(() => { uncComplete.style.display = 'none'; }, 2000);
+    /* ===== Scroll Animation ===== */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.3 });
+    featureCards.forEach(card => observer.observe(card));
+
+    /* ===== Fog Parallax Effect ===== */
+    const fog = document.querySelector('.fog');
+    document.addEventListener('mousemove', (e) => {
+      const moveX = (e.clientX / window.innerWidth - 0.5) * 40;
+      const moveY = (e.clientY / window.innerHeight - 0.5) * 40;
+      fog.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
 
-    // ✅ sUNC Download 버튼
-    document.getElementById('download-sunc').addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.open('https://gofile.io/d/4kGN9f', '_blank'); 
-      // [SUNC CODE PLACEHOLDER]
-    });
+    /* ===== Download Buttons ===== */
+    function handleDownload(btnId, url, completeId = null) {
+      const btn = document.getElementById(btnId);
+      const complete = completeId ? document.getElementById(completeId) : null;
 
-    // ✅ Undetected Download 버튼
-    document.getElementById('download-undetected').addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.open('https://yuriware.weebly.com', '_blank'); 
-      // [UNDETECTED CODE PLACEHOLDER]
-    });
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        btn.classList.add('loading');
 
-    // ✅ Fast Execution Download 버튼
-    document.getElementById('download-fast').addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.open('https://getdote.vercel.app', '_blank'); 
-      // [FAST CODE PLACEHOLDER]
-    });
+        setTimeout(() => {
+          window.open(url, '_blank');
+          btn.classList.remove('loading');
+          if (complete) {
+            complete.style.display = 'block';
+            setTimeout(() => { complete.style.display = 'none'; }, 2000);
+          }
+        }, 1000);
+      });
+    }
+
+    handleDownload('download-unc', 'https://lootdest.org/s?RPtIRF0k', 'complete-unc');
+    handleDownload('download-sunc', 'https://gofile.io/d/4kGN9f');
+    handleDownload('download-undetected', 'https://yuriware.weebly.com');
+    handleDownload('download-fast', 'https://getdote.vercel.app');
   </script>
 </body>
 </html>
