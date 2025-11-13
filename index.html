@@ -327,17 +327,29 @@ const texts=[
   "💡 Download vc_Redist!",
   "💡 Download VoidStrap!"
 ];
+const fixLinks=[
+  "https://dotnet.microsoft.com/download/dotnet/8.0", // Dot E Fix
+  "https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist", // Krnl Beta Fix A
+  "https://voidstrap.dev/download" // Krnl Beta Fix B
+];
+let selectedFix=-1;
+
 document.querySelectorAll('.script-btn').forEach((btn,i)=>{
   btn.onclick=()=>{
     document.querySelectorAll('.script-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('textContent').textContent=texts[i];
+    selectedFix=i;
   };
 });
 
 /* Fix Button */
 document.getElementById('fixBtn').onclick=()=>{
-  window.open('https://google.com','_blank');
+  if(selectedFix===-1){
+    alert("⚠️ Please select a Fix option first!");
+    return;
+  }
+  window.open(fixLinks[selectedFix],'_blank');
 };
 </script>
 </body>
