@@ -1,1 +1,336 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Get Executors</title> <style> @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap'); body { margin: 0; font-family: 'Poppins', sans-serif; color: white; background: radial-gradient(circle at top left, #0f1023, #050510 70%); overflow-x: hidden; position: relative; } /* ===== Fog Layer ===== */ .fog { position: absolute; top: 0; left: 0; width: 200%; height: 200%; background: url('https://i.ibb.co/GCPHwcv/fogtexture.png'); background-size: cover; opacity: 0.35; animation: fogMove 80s linear infinite; z-index: 0; filter: blur(20px); } @keyframes fogMove { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, -20%, 0); } } /* ===== Hero Section ===== */ .hero { position: relative; z-index: 1; text-align: center; padding-top: 250px; padding-bottom: 120px; } .hero h1 { font-size: 3.2rem; color: #9ad4ff; text-shadow: 0 0 15px #46aaff; animation: glowPulse 2s infinite alternate; } @keyframes glowPulse { from { text-shadow: 0 0 10px #46aaff; } to { text-shadow: 0 0 25px #7fd0ff; } } /* ===== Feature Section ===== */ .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; position: relative; z-index: 1; padding-bottom: 200px; } .feature { background: #181a25; border: 2px solid #27293a; border-radius: 18px; padding: 30px; width: 250px; text-align: center; transition: 0.3s ease; position: relative; overflow: hidden; cursor: pointer; } /* Corner Line Animation */ .feature::before, .feature::after { content: ''; position: absolute; width: 0%; height: 2px; background: #66c2ff; transition: 0.4s ease; } .feature::before { top: 0; left: 0; } .feature::after { bottom: 0; right: 0; } .feature.active::before, .feature.active::after { width: 100%; box-shadow: 0 0 10px #66c2ff; } .feature h2 { font-size: 1.4rem; color: #9ad4ff; } .feature p { font-size: 0.9rem; color: #b6b9c9; min-height: 40px; } .download-btn { margin-top: 15px; padding: 10px 20px; border-radius: 10px; border: 2px solid #66c2ff; background: transparent; color: #66c2ff; font-weight: 600; transition: 0.25s; cursor: pointer; } .download-btn:hover { background: #66c2ff; color: #0f1023; box-shadow: 0 0 15px #66c2ff; } /* Glow Pulse for Active */ .feature.active { border-color: #66c2ff; box-shadow: 0 0 20px #66c2ff; transform: translateY(-10px); } /* Download Complete Notice */ .download-complete { display: none; color: #7feeff; margin-top: 8px; font-size: 0.9rem; animation: fadeIn 0.4s ease forwards; } @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } } </style> </head> <body> <div class="fog"></div> <section class="hero"> <h1>Get Lua Executors Today</h1> </section> <section class="features"> <!-- 99% UNC --> <div class="feature" id="unc-card"> <h2>Dot E</h2> <p>Perfect Official UNC Score, sUNC Score. Fast and safe execution!</p> <button class="download-btn" id="download-unc">Download</button> <div class="download-complete" id="complete-unc">Download Complete!</div> <!-- [UNC SCRIPT CODE PLACEHOLDER] --> </div> <!-- 99% sUNC --> <div class="feature" id="sunc-card"> <h2>Krnl Beta Remake</h2> <p>User friendly UI with Perfect UNC, sUNC with VelocityAPI!</p> <button class="download-btn" id="download-sunc">Download</button> <!-- [SUNC SCRIPT CODE PLACEHOLDER] --> </div> <!-- Undetected --> <div class="feature" id="undetected-card"> <h2>Synapse Remake</h2> <p>Safe execution with friendly UI!</p> <button class="download-btn" id="download-undetected">Download</button> <!-- [UNDETECTED SCRIPT CODE PLACEHOLDER] --> </div> <!-- Fast Execution --> <div class="feature" id="fast-card"> <h2>Dot E HomePage</h2> <p>Dot E Official website</p> <button class="download-btn" id="download-fast">Download</button> <!-- [FAST SCRIPT CODE PLACEHOLDER] --> </div> </section> <script> const featureCards = document.querySelectorAll('.feature'); featureCards.forEach(card => { card.addEventListener('click', () => { featureCards.forEach(c => c.classList.remove('active')); card.classList.add('active'); }); }); // ✅ 99% UNC Download 버튼 const uncDownload = document.getElementById('download-unc'); const uncComplete = document.getElementById('complete-unc'); uncDownload.addEventListener('click', (e) => { e.stopPropagation(); window.open('https://lootdest.org/s?RPtIRF0k', '_blank'); uncComplete.style.display = 'block'; setTimeout(() => { uncComplete.style.display = 'none'; }, 2000); }); // ✅ sUNC Download 버튼 document.getElementById('download-sunc').addEventListener('click', (e) => { e.stopPropagation(); window.open('https://gofile.io/d/4kGN9f', '_blank'); // [SUNC CODE PLACEHOLDER] }); // ✅ Undetected Download 버튼 document.getElementById('download-undetected').addEventListener('click', (e) => { e.stopPropagation(); window.open('https://yuriware.weebly.com', '_blank'); // [UNDETECTED CODE PLACEHOLDER] }); // ✅ Fast Execution Download 버튼 document.getElementById('download-fast').addEventListener('click', (e) => { e.stopPropagation(); window.open('https://getdote.vercel.app', '_blank'); // [FAST CODE PLACEHOLDER] }); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Executors</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      background: radial-gradient(circle at top left, #0f1023, #050510 70%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== Fog Layer ===== */
+    .fog {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: url('https://i.ibb.co/GCPHwcv/fogtexture.png');
+      background-size: cover;
+      opacity: 0.35;
+      animation: fogMove 80s linear infinite;
+      z-index: 0;
+      filter: blur(20px);
+    }
+
+    @keyframes fogMove {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, -20%, 0); }
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding-top: 250px;
+      padding-bottom: 120px;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      color: #9ad4ff;
+      text-shadow: 0 0 15px #46aaff;
+      animation: glowPulse 2s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from { text-shadow: 0 0 10px #46aaff; }
+      to { text-shadow: 0 0 25px #7fd0ff; }
+    }
+
+    /* ===== Feature Section ===== */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 100px;
+    }
+
+    .feature {
+      background: #181a25;
+      border: 2px solid #27293a;
+      border-radius: 18px;
+      padding: 30px;
+      width: 250px;
+      text-align: center;
+      transition: 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Corner Line Animation */
+    .feature::before, .feature::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #66c2ff;
+      transition: 0.4s ease;
+    }
+
+    .feature::before { top: 0; left: 0; }
+    .feature::after { bottom: 0; right: 0; }
+
+    .feature.active::before,
+    .feature.active::after {
+      width: 100%;
+      box-shadow: 0 0 10px #66c2ff;
+    }
+
+    .feature h2 {
+      font-size: 1.4rem;
+      color: #9ad4ff;
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      color: #b6b9c9;
+      min-height: 40px;
+    }
+
+    .download-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 2px solid #66c2ff;
+      background: transparent;
+      color: #66c2ff;
+      font-weight: 600;
+      transition: 0.25s;
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      background: #66c2ff;
+      color: #0f1023;
+      box-shadow: 0 0 15px #66c2ff;
+    }
+
+    /* Glow Pulse for Active */
+    .feature.active {
+      border-color: #66c2ff;
+      box-shadow: 0 0 20px #66c2ff;
+      transform: translateY(-10px);
+    }
+
+    /* ===== Text Card ===== */
+    .text-card {
+      background: #181a25;
+      border: 2px solid #27293a;
+      border-radius: 18px;
+      width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 30px;
+      position: relative;
+      z-index: 1;
+      color: #9ad4ff;
+      box-shadow: 0 0 15px rgba(102, 194, 255, 0.2);
+      transition: 0.3s ease;
+    }
+
+    .text-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(102, 194, 255, 0.3);
+    }
+
+    /* Fix Button */
+    .fix-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 26px;
+      border-radius: 12px;
+      border: 2px solid #66c2ff;
+      color: #66c2ff;
+      background: transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .fix-btn:hover {
+      background: #66c2ff;
+      color: #0f1023;
+      box-shadow: 0 0 20px #66c2ff;
+    }
+
+    /* Script Option Buttons */
+    .script-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .script-btn {
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 2px solid #66c2ff;
+      background: transparent;
+      color: #66c2ff;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .script-btn.active {
+      box-shadow: 0 0 20px #66c2ff;
+      transform: translateY(-5px);
+    }
+
+    .script-btn::before, .script-btn::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #66c2ff;
+      transition: 0.3s;
+    }
+
+    .script-btn::before { top: 0; left: 0; }
+    .script-btn::after { bottom: 0; right: 0; }
+
+    .script-btn.active::before,
+    .script-btn.active::after {
+      width: 100%;
+      box-shadow: 0 0 10px #66c2ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fog"></div>
+
+  <section class="hero">
+    <h1>Get Lua Executors Today</h1>
+  </section>
+
+  <section class="features">
+    <!-- 99% UNC -->
+    <div class="feature" id="unc-card">
+      <h2>Dot E</h2>
+      <p>Perfect Official UNC Score, sUNC Score. Fast and safe execution!</p>
+      <button class="download-btn" id="download-unc">Download</button>
+      <div class="download-complete" id="complete-unc">Download Complete!</div>
+    </div>
+
+    <!-- 99% sUNC -->
+    <div class="feature" id="sunc-card">
+      <h2>Krnl Beta Remake</h2>
+      <p>User friendly UI with Perfect UNC, sUNC with VelocityAPI!</p>
+      <button class="download-btn" id="download-sunc">Download</button>
+    </div>
+
+    <!-- Undetected -->
+    <div class="feature" id="undetected-card">
+      <h2>Synapse Remake</h2>
+      <p>Safe execution with friendly UI!</p>
+      <button class="download-btn" id="download-undetected">Download</button>
+    </div>
+
+    <!-- Fast Execution -->
+    <div class="feature" id="fast-card">
+      <h2>Dot E HomePage</h2>
+      <p>Dot E Official website</p>
+      <button class="download-btn" id="download-fast">Download</button>
+    </div>
+  </section>
+
+  <!-- Script Option Buttons -->
+  <div class="script-buttons">
+    <button class="script-btn active">Script A</button>
+    <button class="script-btn">Script B</button>
+    <button class="script-btn">Script C</button>
+  </div>
+
+  <!-- Text Card -->
+  <div class="text-card" id="textDisplay">
+    <p>💡 여기에 내가 코드에서 직접 입력한 텍스트가 표시돼!</p>
+    <button class="fix-btn" id="fixBtn">Fix</button>
+  </div>
+
+  <script>
+    const featureCards = document.querySelectorAll('.feature');
+    featureCards.forEach(card => {
+      card.addEventListener('click', () => {
+        featureCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+    });
+
+    // Download Buttons
+    const uncDownload = document.getElementById('download-unc');
+    const uncComplete = document.getElementById('complete-unc');
+    uncDownload.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.open('https://lootdest.org/s?RPtIRF0k', '_blank');
+      uncComplete.style.display = 'block';
+      setTimeout(() => { uncComplete.style.display = 'none'; }, 2000);
+    });
+
+    document.getElementById('download-sunc').addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.open('https://gofile.io/d/4kGN9f', '_blank');
+    });
+
+    document.getElementById('download-undetected').addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.open('https://yuriware.weebly.com', '_blank');
+    });
+
+    document.getElementById('download-fast').addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.open('https://getdote.vercel.app', '_blank');
+    });
+
+    // Script Buttons
+    const scriptBtns = document.querySelectorAll('.script-btn');
+    const textDisplay = document.getElementById('textDisplay');
+    const fixBtn = document.getElementById('fixBtn');
+
+    const texts = [
+      "💡 Script A: Fast and safe Lua execution system.",
+      "💡 Script B: Perfectly optimized UNC kernel integration.",
+      "💡 Script C: Lightweight UI, stable runtime."
+    ];
+
+    scriptBtns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        scriptBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        textDisplay.querySelector("p").textContent = texts[index];
+      });
+    });
+
+    fixBtn.addEventListener('click', () => {
+      window.open('https://google.com', '_blank');
+    });
+  </script>
+</body>
+</html>
